@@ -31,10 +31,10 @@ public class PlayerController : MonoBehaviour
 
         Vector3 move = Vector3.zero;
 
-        if (Input.GetKeyDown(KeyCode.W)) { move.y += moveAmount; hasMoved = true; }
-        if (Input.GetKeyDown(KeyCode.S)) { move.y -= moveAmount; hasMoved = true; }
-        if (Input.GetKeyDown(KeyCode.A)) { move.x -= moveAmount; hasMoved = true; }
-        if (Input.GetKeyDown(KeyCode.D)) { move.x += moveAmount; hasMoved = true; }
+        if (Input.GetKeyDown(KeyCode.W)) { move.y += moveAmount; hasMoved = true; GameStats.Instance?.AddStep(); }
+        if (Input.GetKeyDown(KeyCode.S)) { move.y -= moveAmount; hasMoved = true; GameStats.Instance?.AddStep(); }
+        if (Input.GetKeyDown(KeyCode.A)) { move.x -= moveAmount; hasMoved = true; GameStats.Instance?.AddStep(); }
+        if (Input.GetKeyDown(KeyCode.D)) { move.x += moveAmount; hasMoved = true; GameStats.Instance?.AddStep(); }
 
         Vector3 newPos = transform.position + move;
 

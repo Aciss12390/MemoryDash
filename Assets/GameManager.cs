@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         gameOverCanvas.SetActive(true);
         FindFirstObjectByType<PlayerController>().LockMovement();
+        GameStats.Instance?.RecordFail();
     }
 
     public void Win()
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         winCanvas.SetActive(true);
         FindFirstObjectByType<PlayerController>().LockMovement();
+        GameStats.Instance?.LevelCompleted();
+        Invoke("ShowLevelStats", 2f);
     }
 
     public void RestartGame()
@@ -46,6 +49,12 @@ public class GameManager : MonoBehaviour
             player.UnlockMovement();
         }
     }
+
+    public void LoadStatsScreen()
+    {
+        SceneManager.LoadScene("LevelSummary");
+    }
+
     public void LoadNextLevel()
     {
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -57,7 +66,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(0); // loop back
+            SceneManager.LoadScene(0);
         }
     }
 }
